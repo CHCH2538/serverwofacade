@@ -5,23 +5,30 @@
  */
 
 package serverwofacade;
+import java.util.Scanner;
 public class ServerWOFacade {
-    public static void main(String[] args) {
-        ScheduleServer scheduleServer = new ScheduleServer();
-	scheduleServer.startBooting();
-	scheduleServer.readSystemConfigFile();
-	scheduleServer.init();
-	scheduleServer.initializeContext();
-	scheduleServer.initializeListeners();
-	scheduleServer.createSystemObjects();
-	System.out.println("Start working......");
-	System.out.println("After work done.........");
-	scheduleServer.releaseProcesses();
-	scheduleServer.destory();
-	scheduleServer.destroySystemObjects();
-	scheduleServer.destoryListeners();
-	scheduleServer.destoryContext();
-	scheduleServer.shutdown();
+	public static void main(String[] args) {
+		
+    FacadeImplement obj = FacadeImplement.getFacadeObj();
+	
+	System.out.print("your command (initiate or kill): ");
+	Scanner input = new Scanner(System.in);
+	String cmdInput = input.nextLine();
+
+	switch (cmdInput) {
+		case "initiate":
+		obj.initiateServer();
+		break;
+
+		case "kill":
+		obj.killServer();
+		break;
+
+		default:
+		System.out.println("Sorry. Your command does not exist.");
+	} 
+	
+	
     }
     
 }
